@@ -12,32 +12,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
-const app_1 = __importDefault(require("./app"));
-const config_1 = __importDefault(require("./app/config"));
-const DB_1 = __importDefault(require("./app/DB"));
-let server;
-const main = () => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        yield mongoose_1.default.connect(config_1.default.databaseUrl);
-        yield (0, DB_1.default)();
-        server = app_1.default.listen(config_1.default.port, () => {
-            console.log(`server are running at port ${config_1.default.port} !`);
-        });
-    }
-    catch (error) {
-        console.log(error);
+const config_1 = __importDefault(require("../config"));
+const users_model_1 = require("../modules/users/users.model");
+const admin = {
+    name: "Kazi Rihatul Islam Rahat",
+    email: "kazirihatul@gmail.com",
+    phone: "01957564628",
+    password: config_1.default.adminPassword,
+    role: "admin",
+};
+const seedAdmin = () => __awaiter(void 0, void 0, void 0, function* () {
+    const isSuperAdminAxist = yield users_model_1.usersModel.findOne({ role: 'admin' });
+    if (!isSuperAdminAxist) {
+        yield users_model_1.usersModel.create(admin);
     }
 });
-main();
-process.on("unhandledRejection", () => {
-    if (server) {
-        server.close(() => {
-            process.exit(1);
-        });
-    }
-    process.exit(1);
-});
-process.on("uncaughtException", () => {
-    process.exit(1);
-});
+exports.default = seedAdmin;

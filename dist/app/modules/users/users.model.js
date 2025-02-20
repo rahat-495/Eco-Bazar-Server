@@ -32,8 +32,9 @@ const userSchema = new mongoose_1.Schema({
         select: 0,
     },
     phone: {
-        type: Number,
+        type: String,
         required: true,
+        unique: true,
     },
     role: {
         type: String,
