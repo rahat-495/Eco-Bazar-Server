@@ -20,8 +20,9 @@ const userSchema = new Schema<TUser>({
         select : 0 ,
     },
     phone : {
-        type : Number ,
+        type : String ,
         required : true ,
+        unique : true ,
     },
     role : {
         type : String ,

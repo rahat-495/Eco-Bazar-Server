@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import app from "./app"
 import {Server} from "http";
 import config from "./app/config";
+import seedAdmin from "./app/DB";
 
 let server : Server ;
 const main = async () => {
@@ -10,6 +11,7 @@ const main = async () => {
     try {
 
         await mongoose.connect(config.databaseUrl as string) ;
+        await seedAdmin() ;
         server = app.listen(config.port , () => {
             console.log(`server are running at port ${config.port} !`) ;
         })

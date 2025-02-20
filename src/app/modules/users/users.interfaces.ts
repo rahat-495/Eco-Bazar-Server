@@ -2,7 +2,7 @@
 export type TUser = {
     name : string ;
     email : string ;
-    phone : number ;
+    phone : string ;
     password : string ;
     role : "admin" | "user" ;
 }
