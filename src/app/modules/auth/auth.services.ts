@@ -15,7 +15,7 @@ const createUserIntoDb = async (payload : TUser) => {
     const result = await usersModel.create(payload) ;
     const tokenPayload = { email : result?.email , phone : result?.phone , role : result?.role } ;
     const token = jwt.sign(tokenPayload , config.accessSecret as string , {expiresIn : "10d"}) ;
-    return {token} ;
+    return {userData : result , token} ;
 }
 
 const loginUser = async (payload : Partial<TUser>) => {
@@ -29,7 +29,8 @@ const loginUser = async (payload : Partial<TUser>) => {
     }
     const tokenPayload = { email : isUserAlreadyAxist?.email , phone : isUserAlreadyAxist?.phone , role : isUserAlreadyAxist?.role } ;
     const token = jwt.sign(tokenPayload , config.accessSecret as string , {expiresIn : "10d"}) ;
-    return {token} ;
+    isUserAlreadyAxist.password = "" ;
+    return {userData : isUserAlreadyAxist , token} ;
 }
 
 export const authServices = {
