@@ -27,7 +27,7 @@ const createUserIntoDb = (payload) => __awaiter(void 0, void 0, void 0, function
     const result = yield users_model_1.usersModel.create(payload);
     const tokenPayload = { email: result === null || result === void 0 ? void 0 : result.email, phone: result === null || result === void 0 ? void 0 : result.phone, role: result === null || result === void 0 ? void 0 : result.role };
     const token = jsonwebtoken_1.default.sign(tokenPayload, config_1.default.accessSecret, { expiresIn: "10d" });
-    return { token };
+    return { userData: result, token };
 });
 const loginUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const isUserAlreadyAxist = yield users_model_1.usersModel.findOne({ email: payload === null || payload === void 0 ? void 0 : payload.email, phone: payload === null || payload === void 0 ? void 0 : payload.phone }).select("+password");
@@ -40,7 +40,8 @@ const loginUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     }
     const tokenPayload = { email: isUserAlreadyAxist === null || isUserAlreadyAxist === void 0 ? void 0 : isUserAlreadyAxist.email, phone: isUserAlreadyAxist === null || isUserAlreadyAxist === void 0 ? void 0 : isUserAlreadyAxist.phone, role: isUserAlreadyAxist === null || isUserAlreadyAxist === void 0 ? void 0 : isUserAlreadyAxist.role };
     const token = jsonwebtoken_1.default.sign(tokenPayload, config_1.default.accessSecret, { expiresIn: "10d" });
-    return { token };
+    isUserAlreadyAxist.password = "";
+    return { userData: isUserAlreadyAxist, token };
 });
 exports.authServices = {
     loginUser,

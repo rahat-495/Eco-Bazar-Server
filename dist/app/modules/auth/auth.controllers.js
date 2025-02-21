@@ -16,14 +16,17 @@ exports.authControllers = void 0;
 const catchAsync_1 = __importDefault(require("../../utils/catchAsync"));
 const auth_services_1 = require("./auth.services");
 const sendResponse_1 = __importDefault(require("../../utils/sendResponse"));
+const config_1 = __importDefault(require("../../config"));
 const registerUser = (0, catchAsync_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield auth_services_1.authServices.createUserIntoDb(req.body);
+    res.cookie("token", result === null || result === void 0 ? void 0 : result.token, { secure: config_1.default.nodeEnv === "production", httpOnly: true, sameSite: "none", maxAge: 1000 * 60 * 60 * 24 * 10 });
     if (result) {
         (0, sendResponse_1.default)(res, { data: result, statusCode: 200, success: true, message: "Register user success full !" });
     }
 }));
 const loginUser = (0, catchAsync_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield auth_services_1.authServices.loginUser(req.body);
+    res.cookie("token", result === null || result === void 0 ? void 0 : result.token, { secure: config_1.default.nodeEnv === "production", httpOnly: true, sameSite: "none", maxAge: 1000 * 60 * 60 * 24 * 10 });
     if (result) {
         (0, sendResponse_1.default)(res, { data: result, statusCode: 200, success: true, message: "User login success full !" });
     }
