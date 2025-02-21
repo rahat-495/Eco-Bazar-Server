@@ -9,6 +9,10 @@ const userSchema = new Schema<TUser>({
         type : String ,
         required : true ,
     },
+    profileImage : {
+        type : String ,
+        default : "" ,
+    },
     email : {
         type : String ,
         unique : true ,
