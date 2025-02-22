@@ -5,12 +5,14 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 import httpStatus from "http-status";
 import { usersModel } from "../users/users.model";
 import config from "../../config";
+import { NextFunction, Request, Response } from "express";
 
 type TUserRole = "user" | "admin" ;
 
-const auth = async (...requiredRoles : TUserRole[]) => {
-    return catchAsync(async (req , res , next) => {
+const auth = (...requiredRoles : TUserRole[]) => {
+    return catchAsync(async (req : Request , res : Response , next : NextFunction) => {
         const token = req.headers.authorization ;
+        console.log(token);
         
         if(!token){
             throw new AppError(httpStatus.UNAUTHORIZED , "You are not authorized !") ;
