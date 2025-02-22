@@ -34,8 +34,22 @@ const createItem = (0, catchAsync_1.default)((req, res, next) => __awaiter(void 
         (0, sendResponse_1.default)(res, { data: result, statusCode: 200, success: true, message: "Items are created successfully !" });
     }
 }));
+const updateItem = (0, catchAsync_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield items_services_1.itemServices.updateItemFromDb(req.params.id, req.body);
+    if (result) {
+        (0, sendResponse_1.default)(res, { data: result, statusCode: 200, success: true, message: "Item are update successfully !" });
+    }
+}));
+const deleteItem = (0, catchAsync_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield items_services_1.itemServices.deleteItemIntoDb(req.params.id);
+    if (result) {
+        (0, sendResponse_1.default)(res, { data: result, statusCode: 200, success: true, message: "Item are deleted successfully !" });
+    }
+}));
 exports.itemControllers = {
     createItem,
+    deleteItem,
+    updateItem,
     getAllItems,
     getSingleItem,
 };

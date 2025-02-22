@@ -13,4 +13,6 @@ const router = (0, express_1.Router)();
 router.get('/', items_controllers_1.itemControllers.getAllItems);
 router.get('/:id', items_controllers_1.itemControllers.getSingleItem);
 router.post('/create-item', (0, auth_1.default)("admin"), (0, validateRequest_1.default)(items_validations_1.itemValidationSchema.createItemValidationSchema), items_controllers_1.itemControllers.createItem);
+router.patch('/update-item/:id', (0, auth_1.default)("admin"), (0, validateRequest_1.default)(items_validations_1.itemValidationSchema.updateItemValidationSchema), items_controllers_1.itemControllers.updateItem);
+router.delete('/:id', (0, auth_1.default)("admin"), items_controllers_1.itemControllers.deleteItem);
 exports.itemRoutes = router;

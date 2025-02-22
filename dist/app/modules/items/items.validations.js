@@ -12,6 +12,17 @@ const createItemValidationSchema = zod_1.z.object({
         description: zod_1.z.string(),
     })
 });
+const updateItemValidationSchema = zod_1.z.object({
+    body: zod_1.z.object({
+        title: zod_1.z.string().optional(),
+        price: zod_1.z.string().optional(),
+        rating: zod_1.z.string().optional(),
+        quantity: zod_1.z.string().optional(),
+        image: zod_1.z.string().optional(),
+        description: zod_1.z.string().optional(),
+    })
+});
 exports.itemValidationSchema = {
     createItemValidationSchema,
+    updateItemValidationSchema,
 };
