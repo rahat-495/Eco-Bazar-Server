@@ -22,6 +22,12 @@ const getAllItems = (0, catchAsync_1.default)((req, res, next) => __awaiter(void
         (0, sendResponse_1.default)(res, { data: result, statusCode: 200, success: true, message: "All items are retrived !" });
     }
 }));
+const getSingleItem = (0, catchAsync_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield items_services_1.itemServices.getSingleItemFromDb(req.params.id);
+    if (result) {
+        (0, sendResponse_1.default)(res, { data: result, statusCode: 200, success: true, message: "Item are retrived !" });
+    }
+}));
 const createItem = (0, catchAsync_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield items_services_1.itemServices.createItemIntoDb(req.body);
     if (result) {
@@ -31,4 +37,5 @@ const createItem = (0, catchAsync_1.default)((req, res, next) => __awaiter(void 
 exports.itemControllers = {
     createItem,
     getAllItems,
+    getSingleItem,
 };

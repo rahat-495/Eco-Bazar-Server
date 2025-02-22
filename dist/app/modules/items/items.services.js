@@ -15,6 +15,10 @@ const getAllItemsFromDb = () => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield items_model_1.itemsModel.find();
     return result;
 });
+const getSingleItemFromDb = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield items_model_1.itemsModel.findById(id);
+    return result;
+});
 const createItemIntoDb = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield items_model_1.itemsModel.create(payload);
     return result;
@@ -22,4 +26,5 @@ const createItemIntoDb = (payload) => __awaiter(void 0, void 0, void 0, function
 exports.itemServices = {
     createItemIntoDb,
     getAllItemsFromDb,
+    getSingleItemFromDb,
 };
