@@ -4,10 +4,11 @@ import { z } from "zod";
 const createItemValidationSchema = z.object({
     body : z.object({
     title : z.string() ,
-    price : z.number() ,
-    rating : z.number() ,
-    quantity : z.number() ,
+    price : z.string() ,
+    rating : z.string() ,
+    quantity : z.string() ,
     image : z.string() ,
+    description : z.string() ,
     })
 })
 

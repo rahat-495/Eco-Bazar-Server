@@ -7,6 +7,11 @@ const getAllItemsFromDb = async () => {
     return result ;   
 }
 
+const getSingleItemFromDb = async (id : string) => {
+    const result = await itemsModel.findById(id) ;
+    return result ;   
+}
+
 const createItemIntoDb = async (payload : TItem) => {
     const result = await itemsModel.create(payload) ;
     return result ;   
@@ -15,4 +20,5 @@ const createItemIntoDb = async (payload : TItem) => {
 export const itemServices = {
     createItemIntoDb ,
     getAllItemsFromDb ,
+    getSingleItemFromDb ,
 }

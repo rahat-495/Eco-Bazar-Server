@@ -5,5 +5,6 @@ export type TItem = {
     price : number ;    
     rating : number ;    
     quantity : number ;    
-    image : string ;    
+    image : string ;   
+    description : string ; 
 }

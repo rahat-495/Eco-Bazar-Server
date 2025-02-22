@@ -10,6 +10,13 @@ const getAllItems = catchAsync(async (req , res , next) => {
     }
 })
 
+const getSingleItem = catchAsync(async (req , res , next) => {
+    const result = await itemServices.getSingleItemFromDb(req.params.id) ;
+    if(result){
+        sendResponse(res , { data : result , statusCode : 200 , success : true , message : "Item are retrived !" })
+    }
+})
+
 const createItem = catchAsync(async (req , res , next) => {
     const result = await itemServices.createItemIntoDb(req.body) ;
     if(result){
@@ -20,4 +27,5 @@ const createItem = catchAsync(async (req , res , next) => {
 export const itemControllers = {
     createItem ,
     getAllItems ,
+    getSingleItem ,
 }
