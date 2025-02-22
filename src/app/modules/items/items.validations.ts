@@ -12,6 +12,18 @@ const createItemValidationSchema = z.object({
     })
 })
 
+const updateItemValidationSchema = z.object({
+    body : z.object({
+    title : z.string().optional() ,
+    price : z.string().optional() ,
+    rating : z.string().optional() ,
+    quantity : z.string().optional() ,
+    image : z.string().optional() ,
+    description : z.string().optional() ,
+    })
+})
+
 export const itemValidationSchema = {
     createItemValidationSchema ,
+    updateItemValidationSchema ,
 }

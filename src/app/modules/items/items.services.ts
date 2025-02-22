@@ -1,4 +1,5 @@
 
+import AppError from "../../errors/AppErrors";
 import { TItem } from "./items.interface";
 import { itemsModel } from "./items.model";
 
@@ -17,8 +18,28 @@ const createItemIntoDb = async (payload : TItem) => {
     return result ;   
 }
 
+const updateItemFromDb = async (id : string , payload : Partial<TItem>) => {
+    const isItemAxist = await itemsModel.findById(id) ;
+    if(!isItemAxist){
+        throw new AppError(404 , "Item not found !")
+    }
+    const result = await itemsModel.findByIdAndUpdate(id , payload) ;
+    return result ;   
+}
+
+const deleteItemIntoDb = async (id : string) => {
+    const isItemAxist = await itemsModel.findById(id) ;
+    if(!isItemAxist){
+        throw new AppError(404 , "Item not found !")
+    }
+    const result = await itemsModel.findByIdAndDelete(id) ;
+    return result ;   
+}
+
 export const itemServices = {
     createItemIntoDb ,
+    updateItemFromDb ,
+    deleteItemIntoDb ,
     getAllItemsFromDb ,
     getSingleItemFromDb ,
 }

@@ -24,8 +24,24 @@ const createItem = catchAsync(async (req , res , next) => {
     }
 })
 
+const updateItem = catchAsync(async (req , res , next) => {
+    const result = await itemServices.updateItemFromDb(req.params.id , req.body) ;
+    if(result){
+        sendResponse(res , { data : result , statusCode : 200 , success : true , message : "Item are update successfully !" })
+    }
+})
+
+const deleteItem = catchAsync(async (req , res , next) => {
+    const result = await itemServices.deleteItemIntoDb(req.params.id) ;
+    if(result){
+        sendResponse(res , { data : result , statusCode : 200 , success : true , message : "Item are deleted successfully !" })
+    }
+})
+
 export const itemControllers = {
     createItem ,
+    deleteItem ,
+    updateItem ,
     getAllItems ,
     getSingleItem ,
 }
