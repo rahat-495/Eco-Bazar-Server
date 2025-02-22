@@ -18,9 +18,10 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const http_status_1 = __importDefault(require("http-status"));
 const users_model_1 = require("../users/users.model");
 const config_1 = __importDefault(require("../../config"));
-const auth = (...requiredRoles) => __awaiter(void 0, void 0, void 0, function* () {
+const auth = (...requiredRoles) => {
     return (0, catchAsync_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
         const token = req.headers.authorization;
+        console.log(token);
         if (!token) {
             throw new AppErrors_1.default(http_status_1.default.UNAUTHORIZED, "You are not authorized !");
         }
@@ -36,5 +37,5 @@ const auth = (...requiredRoles) => __awaiter(void 0, void 0, void 0, function* (
         req.user = decoded;
         next();
     }));
-});
+};
 exports.default = auth;

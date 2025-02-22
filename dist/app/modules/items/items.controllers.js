@@ -12,16 +12,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.userControllers = void 0;
+exports.itemControllers = void 0;
 const catchAsync_1 = __importDefault(require("../../utils/catchAsync"));
 const sendResponse_1 = __importDefault(require("../../utils/sendResponse"));
-const users_services_1 = require("./users.services");
-const getMyData = (0, catchAsync_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield users_services_1.userServices.getUserDataFromDb(req.user);
+const items_services_1 = require("./items.services");
+const getAllItems = (0, catchAsync_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield items_services_1.itemServices.getAllItemsFromDb();
     if (result) {
-        (0, sendResponse_1.default)(res, { data: result, statusCode: 200, success: true, message: "User data are retrived !" });
+        (0, sendResponse_1.default)(res, { data: result, statusCode: 200, success: true, message: "All items are retrived !" });
     }
 }));
-exports.userControllers = {
-    getMyData,
+const createItem = (0, catchAsync_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield items_services_1.itemServices.createItemIntoDb(req.body);
+    if (result) {
+        (0, sendResponse_1.default)(res, { data: result, statusCode: 200, success: true, message: "Items are created successfully !" });
+    }
+}));
+exports.itemControllers = {
+    createItem,
+    getAllItems,
 };
